@@ -26,26 +26,20 @@ let recent_data_bottom = " ";                                            // Empt
 let location_data = "";                                                 // Empty varible for location data
 let resturant_data = "";                                                // Empty varible for resturant data
 let display_res = "<p><strong>Nearby Resturants</strong></p>";          // Stores initial code for the resturant div
-//let d0 = '0';
-//let today = new Date();
-//let dd = today.getDate();
-//let mm = today.getMonth()+1; //January is 0!
-//let yyyy = today.getFullYear();
-
-let today = new Date();
-let yesterday = new Date(today);
-yesterday.setDate(today.getDate() - 1); //setDate also supports negative values, which cause the month to rollover.
-let dd = yesterday.getDate();
-let mm = yesterday.getMonth()+1; //January is 0!
+let today = new Date();                                                 // Create a date
+let yesterday = new Date(today);                                        // Setup to grab yesterdays date
+yesterday.setDate(today.getDate() - 1);                                 // fetch yesterdays date as flickr has issues when you are ahead of the timezone by a day and it doesnt return anything
+let dd = yesterday.getDate();           
+let mm = yesterday.getMonth()+1;                                        //January is 0!
 let yyyy = yesterday.getFullYear();
-if(dd<10) {
+if(dd<10) {                                                             //Handles formatting for flickr api suitability
     dd = '0'+dd;
 };
 if(mm<10) {
     mm = '0'+mm;
 };
 let date = (yyyy+"-"+mm+"-"+dd);
-let intstr = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key="+api_key+"&date="+date+"&per_page=10&page=1&format=json&nojsoncallback=1";
+let intdate = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key="+api_key+"&date="+date+"&per_page=10&page=1&format=json&nojsoncallback=1";
 
 
 $(function(){
@@ -68,7 +62,7 @@ $(function(){
 
 
     function searchregister(){
-        $.get(intstr, function(flickr){
+        $.get(intdate, function(flickr){                                             // Fetch 10 interesting photos via flickers interesting API on load
             displayflickr(flickr);
         });
         $("#btn").click(function(){                                                 // Begin function on click of #btn my button
