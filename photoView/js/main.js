@@ -26,11 +26,31 @@ let recent_data_bottom = " ";                                            // Empt
 let location_data = "";                                                 // Empty varible for location data
 let resturant_data = "";                                                // Empty varible for resturant data
 let display_res = "<p><strong>Nearby Resturants</strong></p>";          // Stores initial code for the resturant div
-let intstr = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key="+api_key+"&date=2019-03-30&per_page=10&page=1&format=json&nojsoncallback=1";
+//let d0 = '0';
+//let today = new Date();
+//let dd = today.getDate();
+//let mm = today.getMonth()+1; //January is 0!
+//let yyyy = today.getFullYear();
+
+let today = new Date();
+let yesterday = new Date(today);
+yesterday.setDate(today.getDate() - 1); //setDate also supports negative values, which cause the month to rollover.
+let dd = yesterday.getDate();
+let mm = yesterday.getMonth()+1; //January is 0!
+let yyyy = yesterday.getFullYear();
+if(dd<10) {
+    dd = '0'+dd;
+};
+if(mm<10) {
+    mm = '0'+mm;
+};
+let date = (yyyy+"-"+mm+"-"+dd);
+let intstr = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key="+api_key+"&date="+date+"&per_page=10&page=1&format=json&nojsoncallback=1";
+
 
 $(function(){
+
         searchregister();                                   // initiate the search_register function
-        
         $('#modal-close').click(function(){                 // creates a click function for eack modal-close
         $('#modal-container').css('display', 'none');       // sets #modal-container display to none
         $('#modal-content').attr('src', '');                // remove the model-content img on close so it doesnt show up when another picture is selected
@@ -95,6 +115,7 @@ $(function(){
             });
     });
 
+    
     function flickrphotoapi (key, lat, lon){
         flickr_search = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="+key+"&lat="+lat+"&lon="+lon+"&radius=30&radius_units=&content_type=1&media=photo&per_page=10&page=1&format=json&nojsoncallback=1";    // API call for photos within 30km 
         return(flickr_search);
