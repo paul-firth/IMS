@@ -28,7 +28,7 @@ let resturant_data = "";                                                // Empty
 let display_res = "<p><strong>Nearby Resturants</strong></p>";          // Stores initial code for the resturant div
 let today = new Date();                                                 // Create a date
 let yesterday = new Date(today);                                        // Setup to grab yesterdays date
-yesterday.setDate(today.getDate() - 1);                                 // fetch yesterdays date as flickr has issues when you are ahead of the timezone by a day and it doesnt return anything
+yesterday.setDate(today.getDate() - 2);                                 // fetches 2 days prior date, due to timezone issues it can return undefined if your local timezone is on a different date ahead of flickr's.
 let dd = yesterday.getDate();           
 let mm = yesterday.getMonth()+1;                                        //January is 0!
 let yyyy = yesterday.getFullYear();
@@ -61,6 +61,7 @@ $(function(){
 });
 
 
+    
     function searchregister(){
         $.get(intdate, function(flickr){                                             // Fetch 10 interesting photos via flickers interesting API on load
             displayflickr(flickr);
