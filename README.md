@@ -1,6 +1,6 @@
-Copy of some assignments I created for Intelligent Media Systems.
+Copy of assignments I created for Intelligent Media Systems.
 
-Just Assignment 1 now a photo viewer type app that makes use of flickr and HERE's places API's.
+Just Assignment 1 for now. A photo viewer type app that makes use of flickr and HERE's places API's.
 
 Brings up 10 images on load from Flickr's intrestingness api, Allow's selection of 5 places and loads 10 photo's with flickr's photo's 
 API based on the selected locations longitude and latitude, Also use's flickrs places API to display the location name and longitude and latitude.
